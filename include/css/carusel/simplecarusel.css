@@ -1,0 +1,46 @@
+.carousel {
+  position: relative;
+  width: 190px;
+  padding: 10px 20px;
+  background: #eee;
+}
+.carousel .div_img {
+  width: 45px;
+  height: 45px;
+  background-color:red;
+  margin-right:3px;
+  display: block; /* если не поставить block, в ряде браузеров будет inline -> лишнее пространтсво вокруг элементов */
+}
+.carousel .arrow {
+  position: absolute;
+  top: 10px;
+  font-size: 30px;
+  color: #444;
+  text-decoration: none;
+}
+
+.carousel .left-arrow {
+  left: 4px;
+  line-height:42px;
+  cursor:pointer;
+}
+.carousel .right-arrow {
+  right: 4px;
+  line-height:42px;
+  cursor:pointer;
+}
+.gallery {
+  width: 190px;
+  overflow: hidden;
+}
+.gallery ul {
+  height: 45px;
+  width: 9999px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery ul li {
+	float: left;
+}

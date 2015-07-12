@@ -1,0 +1,307 @@
+<?php
+Error_Reporting(E_ALL & ~E_NOTICE);
+session_start();
+
+define('PATH',dirname(__FILE__));
+define('INCLUDE_PATH',dirname(__FILE__).'/include/');
+define('INFO',dirname(__FILE__).'/info/');
+define('SERVER_NAME',$_SERVER["SERVER_NAME"]);
+
+require_once(INCLUDE_PATH.'class/db_connect.php');
+require_once(INCLUDE_PATH.'class/common.php');
+
+//$base = new db_connect("localhost","root","","social");
+$incl_file_arr = array();
+$incl_file_arr = include_file_real($_REQUEST['rqpath']);
+
+//first parameter is needed for checking path there is really or not
+$incl_file = "";
+if($incl_file_arr[0]){
+ $incl_file = $incl_file_arr[0];
+}
+//second parameter is needed to determine opens into this window or create new window
+if($incl_file_arr[1]){
+ $incl_separate = $incl_file_arr[1];
+}
+//for ajax query should to exit from page
+if($incl_separate==3){
+ include $incl_file;
+ //unset($base);
+ exit();
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+<title>Новый взгляд</title>
+<META name="description" content="Идеология, политига, религия">
+<META HTTP-EQUIV="Content-Type" content="text/html;charset=Windows-1251">
+
+<link rel="stylesheet" type="text/css" href="../../../include/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/question.css">
+<link rel="stylesheet" type="text/css" href="../../../include/object/menu/menu.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/jquery/ui-lightness/jquery-ui-1.8.16.custom.css">	
+<link rel="stylesheet" type="text/css" href="../../../include/css/jquery/button/demo.css">	
+
+<script type="text/javascript" src="../../../include/js/jquery/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="../../../include/js/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../include/js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
+
+
+<script language="javascript" src="../../../include/object/menu/menu.js"></script>
+</head>
+
+<body style="padding:0px;margin:0px;">
+<div style="background-image:url(../../../include/images/cap2.jpg);background-repeat: no-repeat;padding:10px;display:none;">
+<table border=0 cellpadding=0 cellspacing=0 width="100%">
+<tr><td width="190px;">
+<img class="flag" style="visibility:;" src="../../../include/images/flag.gif">
+</td>
+<td width="300px;">
+<h1 class="party-name">ДВИЖЕНИЕ<br>ЗА СОЦИАЛЬНУЮ<br>СПРАВЕДЛИВОСТЬ</h1>
+</td>
+<td align="left">
+<div style="padding-left:10px;" class="caption-font">Перемен требуют наши сердца,</div>
+<div style="padding-left:20px;" class="caption-font">Перемен требуют наши глаза,</div>
+<div style="padding-left:30px;" class="caption-font">В нашем смехе и в наших слезах,</div>
+<div style="padding-left:40px;" class="caption-font">И в пульсации вен </div>
+<div style="padding-left:50px;" class="caption-font">Перемен!</div>
+<div style="padding-left:60px;" class="caption-font">Мы ждем перемен.</div>
+<div style="padding-left:70px;" class="signature-font">(В. Цой - Мы Ждём Перемен.)</div>
+</td></tr></table>
+</div>
+<div style="font-size:4px;margin-bottom:20px;">&nbsp;</div>
+
+
+<table border=0 cellpadding=0 cellspacing=0 width="100%">
+
+<tr><td valign="top" align="left" width="180px">
+<div style="text-align:center;margin-right:17px;margin-left:10px">
+<!--<img width="90px" src="../../../include/images/1.gif">-->
+</div>
+<div class="div_main_menu">
+<ul id="my-menu3" class="sample-menu">
+    <li><a href="/introduction">Введение</a></li> 
+    <li class="li_menu"><a href="/worldview">Мировозренческая позиция</a></li> 
+	<li><a href="#0">Россия сегодня</a>
+    </li>
+    <hr size=1 class="hr_line">
+</ul>
+</div>
+
+<div onclick="location.replace('/question');" style="margin-top:50px;margin-left:10px;width:140px;padding:0;cursor:hand;cursor:pointer;">
+<table cellspacing=0 cellpadding=0 border=0><tr>
+ <td valign="middle"><img src="../../../include/images/question.gif"></td>
+ <td valign="middle" style="color:#187DA5;font-size:1em;font-weight:bold;">&nbsp;Вопрос - ответ</td>
+</tr></table></div>
+
+</td>
+<td valign="top" align="left" >
+<!--<div class="title"><i style="color:#1014BE;">Сохраняя мир</i></div>-->
+<div class="textvalue">
+<div><b class='xtop_r'><b class='xb1_r'></b><b class='xb2_r'></b><b class='xb3_r'></b><b class='xb4_r'></b></b></div>
+<div class='wintext'>
+<table cellspacing=0 cellpadding=0 border=0 width="100%"><tr>
+<td valign="top" align="left" style="padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;">
+<?php
+//insert page
+if($incl_file && $incl_file!=-1){
+   include $incl_file;
+} else {
+  if($incl_file!=-1){
+   echo "<br><div class='div_error'>Ошибка! Страница не найдена!</div><br>";
+  }
+}
+?>
+</td>
+<td width="1px"><img src="../../../include/images/spacer.gif"></td>
+</tr></table>
+</div>
+<div><b class='xbottom_r'><b class='xb4_r'></b><b class='xb3_r'></b><b class='xb2_r'></b><b class='xb1_r'></b></b></div>
+</div>
+</td>
+
+<td width="150px;"><!--this is the cap --></td>
+
+<td width="170px" align="left" valign="top" style="display:none;">
+<div class="newsvalue">
+<div><b class='xtop_r'><b class='xb1_r'></b><b class='xb2_r'></b><b class='xb3_r'></b><b class='xb4_r'></b></b></div>
+<div class='newstext'>
+<table cellspacing=0 cellpadding=0 border=0 width="100%"><tr>
+<td valign="top" align="left">
+<?php
+//insert page
+/*if($incl_file && $incl_file!=-1){
+   include $incl_file;
+} else {
+  if($incl_file!=-1){
+   echo "<br><div class='div_error'>Ошибка! Страница не найдена!</div><br>";
+  }
+}*/
+?>
+</td>
+<td width="1px"><img src="../../../include/images/spacer.gif"></td>
+</tr></table>
+</div>
+<div><b class='xbottom_r'><b class='xb4_r'></b><b class='xb3_r'></b><b class='xb2_r'></b><b class='xb1_r'></b></b></div>
+</div>
+</td></tr>
+</table>
+
+</body>
+
+</html><?php
+Error_Reporting(E_ALL & ~E_NOTICE);
+session_start();
+
+define('PATH',dirname(__FILE__));
+define('INCLUDE_PATH',dirname(__FILE__).'/include/');
+define('INFO',dirname(__FILE__).'/info/');
+define('SERVER_NAME',$_SERVER["SERVER_NAME"]);
+
+require_once(INCLUDE_PATH.'class/db_connect.php');
+require_once(INCLUDE_PATH.'class/common.php');
+
+//$base = new db_connect("localhost","root","","social");
+$incl_file_arr = array();
+$incl_file_arr = include_file_real($_REQUEST['rqpath']);
+
+//first parameter is needed for checking path there is really or not
+$incl_file = "";
+if($incl_file_arr[0]){
+ $incl_file = $incl_file_arr[0];
+}
+//second parameter is needed to determine opens into this window or create new window
+if($incl_file_arr[1]){
+ $incl_separate = $incl_file_arr[1];
+}
+//for ajax query should to exit from page
+if($incl_separate==3){
+ include $incl_file;
+ //unset($base);
+ exit();
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+<title>Новый взгляд</title>
+<META name="description" content="Идеология, политига, религия">
+<META HTTP-EQUIV="Content-Type" content="text/html;charset=Windows-1251">
+
+<link rel="stylesheet" type="text/css" href="../../../include/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/question.css">
+<link rel="stylesheet" type="text/css" href="../../../include/object/menu/menu.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/jquery/ui-lightness/jquery-ui-1.8.16.custom.css">	
+<link rel="stylesheet" type="text/css" href="../../../include/css/jquery/button/demo.css">	
+
+<script type="text/javascript" src="../../../include/js/jquery/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="../../../include/js/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../include/js/jquery/jquery-ui-1.8.16.custom.min.js"></script>
+
+
+<script language="javascript" src="../../../include/object/menu/menu.js"></script>
+</head>
+
+<body style="padding:0px;margin:0px;">
+<div style="background-image:url(../../../include/images/cap2.jpg);background-repeat: no-repeat;padding:10px;display:none;">
+<table border=0 cellpadding=0 cellspacing=0 width="100%">
+<tr><td width="190px;">
+<img class="flag" style="visibility:;" src="../../../include/images/flag.gif">
+</td>
+<td width="300px;">
+<h1 class="party-name">ДВИЖЕНИЕ<br>ЗА СОЦИАЛЬНУЮ<br>СПРАВЕДЛИВОСТЬ</h1>
+</td>
+<td align="left">
+<div style="padding-left:10px;" class="caption-font">Перемен требуют наши сердца,</div>
+<div style="padding-left:20px;" class="caption-font">Перемен требуют наши глаза,</div>
+<div style="padding-left:30px;" class="caption-font">В нашем смехе и в наших слезах,</div>
+<div style="padding-left:40px;" class="caption-font">И в пульсации вен </div>
+<div style="padding-left:50px;" class="caption-font">Перемен!</div>
+<div style="padding-left:60px;" class="caption-font">Мы ждем перемен.</div>
+<div style="padding-left:70px;" class="signature-font">(В. Цой - Мы Ждём Перемен.)</div>
+</td></tr></table>
+</div>
+<div style="font-size:4px;margin-bottom:20px;">&nbsp;</div>
+
+
+<table border=0 cellpadding=0 cellspacing=0 width="100%">
+
+<tr><td valign="top" align="left" width="180px">
+<div style="text-align:center;margin-right:17px;margin-left:10px">
+<!--<img width="90px" src="../../../include/images/1.gif">-->
+</div>
+<div class="div_main_menu">
+<ul id="my-menu3" class="sample-menu">
+    <li><a href="/introduction">Введение</a></li> 
+    <li class="li_menu"><a href="/worldview">Мировозренческая позиция</a></li> 
+	<li><a href="#0">Россия сегодня</a>
+    </li>
+    <hr size=1 class="hr_line">
+</ul>
+</div>
+
+<div onclick="location.replace('/question');" style="margin-top:50px;margin-left:10px;width:140px;padding:0;cursor:hand;cursor:pointer;">
+<table cellspacing=0 cellpadding=0 border=0><tr>
+ <td valign="middle"><img src="../../../include/images/question.gif"></td>
+ <td valign="middle" style="color:#187DA5;font-size:1em;font-weight:bold;">&nbsp;Вопрос - ответ</td>
+</tr></table></div>
+
+</td>
+<td valign="top" align="left" >
+<!--<div class="title"><i style="color:#1014BE;">Сохраняя мир</i></div>-->
+<div class="textvalue">
+<div><b class='xtop_r'><b class='xb1_r'></b><b class='xb2_r'></b><b class='xb3_r'></b><b class='xb4_r'></b></b></div>
+<div class='wintext'>
+<table cellspacing=0 cellpadding=0 border=0 width="100%"><tr>
+<td valign="top" align="left" style="padding-left:15px;padding-right:15px;padding-top:10px;padding-bottom:10px;">
+<?php
+//insert page
+if($incl_file && $incl_file!=-1){
+   include $incl_file;
+} else {
+  if($incl_file!=-1){
+   echo "<br><div class='div_error'>Ошибка! Страница не найдена!</div><br>";
+  }
+}
+?>
+</td>
+<td width="1px"><img src="../../../include/images/spacer.gif"></td>
+</tr></table>
+</div>
+<div><b class='xbottom_r'><b class='xb4_r'></b><b class='xb3_r'></b><b class='xb2_r'></b><b class='xb1_r'></b></b></div>
+</div>
+</td>
+
+<td width="150px;"><!--this is the cap --></td>
+
+<td width="170px" align="left" valign="top" style="display:none;">
+<div class="newsvalue">
+<div><b class='xtop_r'><b class='xb1_r'></b><b class='xb2_r'></b><b class='xb3_r'></b><b class='xb4_r'></b></b></div>
+<div class='newstext'>
+<table cellspacing=0 cellpadding=0 border=0 width="100%"><tr>
+<td valign="top" align="left">
+<?php
+//insert page
+/*if($incl_file && $incl_file!=-1){
+   include $incl_file;
+} else {
+  if($incl_file!=-1){
+   echo "<br><div class='div_error'>Ошибка! Страница не найдена!</div><br>";
+  }
+}*/
+?>
+</td>
+<td width="1px"><img src="../../../include/images/spacer.gif"></td>
+</tr></table>
+</div>
+<div><b class='xbottom_r'><b class='xb4_r'></b><b class='xb3_r'></b><b class='xb2_r'></b><b class='xb1_r'></b></b></div>
+</div>
+</td></tr>
+</table>
+
+</body>
+
+</html>

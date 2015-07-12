@@ -1,0 +1,372 @@
+<script language='javascript'>
+function registration(){
+    var str = ""; var i = 0;
+    if($.trim($("#firstname").val()) == ""){
+        str = str+= (str=="")?"Имя":", Имя"; i++;
+    }
+    if($.trim($("#secondname").val()) == ""){
+        str+= (str=="")?"Фамилия":", Фамилия"; i++;
+    }    
+    if(!document.getElementById("checkman").checked && !document.getElementById("checkwoman").checked){
+        str+=  (str=="")?"Пол":", Пол"; i++;
+    }
+    if($.trim($("#email").val()) == ""){
+        str+= (str=="")?"email":", email"; i++;
+    }
+    if($.trim($("#login").val()) == ""){
+        str+= (str=="")?"Логин":", Логин"; i++;
+    }
+    if($.trim($("#password").val()) == ""){
+        str+= (str=="")?"Пароль":", Пароль"; i++;
+    }
+    if(str != ""){
+        if(i==1){
+            alert("Не заполнено обязательное поле: " + str);
+        } else {
+            alert("Не заполнены следующие обязательные поля: " + str);
+        }        
+        return 0;
+    }
+    
+    var s = "firstname=" + $("#firstname").val() + "&secondname=" + $("#secondname").val();
+    var gender;
+    if(document.getElementById("checkman").checked){
+        gender = 1;
+    } else {
+        gender = 2;
+    }
+    s+= "&gender=" + gender + "&telefone=" + $("#telefone").val();
+    s+= "&email=" + $("#email").val();
+    s+= "&login=" + $("#login").val();
+    s+= "&password=" + $("#password").val();
+    
+    $.ajax({
+        url: "registration/registration?separate=1",
+            global: false,
+            type: "POST",
+            data:  s,
+            dataType: "html",
+            success: function(ss){
+          		switch(parseInt(ss)) {
+                    case 1:
+                        
+                        break;
+                    case 2:
+                        alert("Пользователь с таким логином и паролем уже существует!");
+                        break;
+                    case 3:
+                        alert("Ошибка регистрации! Попробуйте зарегестрироваться еще раз.");
+				}
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        }).responseText;    
+    }
+
+$(document).ready(function() {
+    $('#email').blur(function() {
+        if($(this).val() != '') {
+            var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+            if(pattern.test($(this).val())){
+                $(this).css({'border' : '1px solid #cccccc'});
+            } else {
+                $(this).css({'border' : '2px solid #ff0000'});
+                alert("Неверно указан email!");
+            }
+        } else {
+            $(this).css({'border' : '1px solid #ff0000'});
+            $('#valid').text('Поле email не должно быть пустым');
+        }
+    });
+});
+</script>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td valign="top" width="500px;">
+			<div style="color: rgb(20, 29, 60); margin: 30px 50px 50px;">
+			<div style="font-size: 2em;">СКИДКА 10%</div>
+			каждому новому подписчику<br />
+			<br />
+			Получайте по почте самые<br />
+			актуальные новости:<br />
+			<br />
+			&bull;&nbsp;&nbsp;Новые поступления и лучшие<br />
+			&bull;&nbsp;&nbsp;модели коллекции<br />
+			<br />
+			Акции, скидки, подарки<br />
+			&nbsp;
+			<div style="font-size: 1.5em;">Как получить скидку?</div>
+			<br />
+			1. Зарегестрируйтесь.<br />
+			2. В личном кабинете появится купон.<br />
+			3. Выбирите купон при покупке и получите скидку 10%</div>
+			</td>
+			<td style="border-left: 1px dotted rgb(204, 204, 204);" valign="top">
+			<div style="color: rgb(20, 29, 60); margin: 30px 50px 50px;">
+			<div style="font-size: 1.5em;">Регистрация</div>
+			&nbsp;
+
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td>Имя&nbsp;*</td>
+						<td>Фамилия&nbsp;*</td>
+					</tr>
+					<tr>
+						<td style="padding: 2px 5px 0px 0px;"><input id="firstname" style="width: 131px;" type="text" value="" /></td>
+						<td style="padding: 2px 5px 0px 0px;"><input id="secondname" style="width: 131px;" type="text" value="" /></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div style="padding: 7px 0px 0px;">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td valign="middle">Пол&nbsp;*:</td>
+						<td style="padding: 3px 3px 0px 10px;" valign="middle"><input id="checkman" name="gender" type="radio" /></td>
+						<td valign="middle"><label for="checkman">мужской</label></td>
+						<td style="padding: 3px 3px 0px 10px;" valign="middle"><input id="checkwoman" name="gender" type="radio" /></td>
+						<td valign="middle"><label for="checkwoman">женский</label></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			&nbsp;
+
+			<div>
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td style="padding: 0px 0px 2px;">Телефон:</td>
+					</tr>
+					<tr>
+						<td><input id="telefone" style="width: 270px;" type="text" value="" /></td>
+					</tr>
+					<tr>
+						<td style="padding: 5px 0px 2px;">e-mail&nbsp;*:</td>
+					</tr>
+					<tr>
+						<td><input id="email" style="width: 270px;" type="text" value="" /></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			&nbsp;
+
+			<div>
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td style="padding: 0px 0px 2px;">Логин&nbsp;*:</td>
+					</tr>
+					<tr>
+						<td><input id="login" style="width: 270px;" type="text" value="" /></td>
+					</tr>
+					<tr>
+						<td style="padding: 5px 0px 2px;">Пароль&nbsp;*:</td>
+					</tr>
+					<tr>
+						<td><input id="password" style="width: 270px;" type="text" value="" /></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div>
+			<div class="product_reserve" onclick="return registration();" style="width: 234px;">ЗАРЕГИСТРИРОВАТЬСЯ&nbsp;&gt;&gt;</div>
+			</div>
+			</div>
+			</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<script language='javascript'>
+function registration(){
+    var str = ""; var i = 0;
+    if($.trim($("#firstname").val()) == ""){
+        str = str+= (str=="")?"Имя":", Имя"; i++;
+    }
+    if($.trim($("#secondname").val()) == ""){
+        str+= (str=="")?"Фамилия":", Фамилия"; i++;
+    }    
+    if(!document.getElementById("checkman").checked && !document.getElementById("checkwoman").checked){
+        str+=  (str=="")?"Пол":", Пол"; i++;
+    }
+    if($.trim($("#email").val()) == ""){
+        str+= (str=="")?"email":", email"; i++;
+    }
+    if($.trim($("#login").val()) == ""){
+        str+= (str=="")?"Логин":", Логин"; i++;
+    }
+    if($.trim($("#password").val()) == ""){
+        str+= (str=="")?"Пароль":", Пароль"; i++;
+    }
+    if(str != ""){
+        if(i==1){
+            alert("Не заполнено обязательное поле: " + str);
+        } else {
+            alert("Не заполнены следующие обязательные поля: " + str);
+        }        
+        return 0;
+    }
+    
+    var s = "firstname=" + $("#firstname").val() + "&secondname=" + $("#secondname").val();
+    var gender;
+    if(document.getElementById("checkman").checked){
+        gender = 1;
+    } else {
+        gender = 2;
+    }
+    s+= "&gender=" + gender + "&telefone=" + $("#telefone").val();
+    s+= "&email=" + $("#email").val();
+    s+= "&login=" + $("#login").val();
+    s+= "&password=" + $("#password").val();
+    
+    $.ajax({
+        url: "registration/registration?separate=1",
+            global: false,
+            type: "POST",
+            data:  s,
+            dataType: "html",
+            success: function(ss){
+          		switch(parseInt(ss)) {
+                    case 1:
+                        
+                        break;
+                    case 2:
+                        alert("Пользователь с таким логином и паролем уже существует!");
+                        break;
+                    case 3:
+                        alert("Ошибка регистрации! Попробуйте зарегестрироваться еще раз.");
+				}
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        }).responseText;    
+    }
+
+$(document).ready(function() {
+    $('#email').blur(function() {
+        if($(this).val() != '') {
+            var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+            if(pattern.test($(this).val())){
+                $(this).css({'border' : '1px solid #cccccc'});
+            } else {
+                $(this).css({'border' : '2px solid #ff0000'});
+                alert("Неверно указан email!");
+            }
+        } else {
+            $(this).css({'border' : '1px solid #ff0000'});
+            $('#valid').text('Поле email не должно быть пустым');
+        }
+    });
+});
+</script>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td valign="top" width="500px;">
+			<div style="color: rgb(20, 29, 60); margin: 30px 50px 50px;">
+			<div style="font-size: 2em;">СКИДКА 10%</div>
+			каждому новому подписчику<br />
+			<br />
+			Получайте по почте самые<br />
+			актуальные новости:<br />
+			<br />
+			&bull;&nbsp;&nbsp;Новые поступления и лучшие<br />
+			&bull;&nbsp;&nbsp;модели коллекции<br />
+			<br />
+			Акции, скидки, подарки<br />
+			&nbsp;
+			<div style="font-size: 1.5em;">Как получить скидку?</div>
+			<br />
+			1. Зарегестрируйтесь.<br />
+			2. В личном кабинете появится купон.<br />
+			3. Выбирите купон при покупке и получите скидку 10%</div>
+			</td>
+			<td style="border-left: 1px dotted rgb(204, 204, 204);" valign="top">
+			<div style="color: rgb(20, 29, 60); margin: 30px 50px 50px;">
+			<div style="font-size: 1.5em;">Регистрация</div>
+			&nbsp;
+
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td>Имя&nbsp;*</td>
+						<td>Фамилия&nbsp;*</td>
+					</tr>
+					<tr>
+						<td style="padding: 2px 5px 0px 0px;"><input id="firstname" style="width: 131px;" type="text" value="" /></td>
+						<td style="padding: 2px 5px 0px 0px;"><input id="secondname" style="width: 131px;" type="text" value="" /></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div style="padding: 7px 0px 0px;">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td valign="middle">Пол&nbsp;*:</td>
+						<td style="padding: 3px 3px 0px 10px;" valign="middle"><input id="checkman" name="gender" type="radio" /></td>
+						<td valign="middle"><label for="checkman">мужской</label></td>
+						<td style="padding: 3px 3px 0px 10px;" valign="middle"><input id="checkwoman" name="gender" type="radio" /></td>
+						<td valign="middle"><label for="checkwoman">женский</label></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			&nbsp;
+
+			<div>
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td style="padding: 0px 0px 2px;">Телефон:</td>
+					</tr>
+					<tr>
+						<td><input id="telefone" style="width: 270px;" type="text" value="" /></td>
+					</tr>
+					<tr>
+						<td style="padding: 5px 0px 2px;">e-mail&nbsp;*:</td>
+					</tr>
+					<tr>
+						<td><input id="email" style="width: 270px;" type="text" value="" /></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			&nbsp;
+
+			<div>
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td style="padding: 0px 0px 2px;">Логин&nbsp;*:</td>
+					</tr>
+					<tr>
+						<td><input id="login" style="width: 270px;" type="text" value="" /></td>
+					</tr>
+					<tr>
+						<td style="padding: 5px 0px 2px;">Пароль&nbsp;*:</td>
+					</tr>
+					<tr>
+						<td><input id="password" style="width: 270px;" type="text" value="" /></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div>
+			<div class="product_reserve" onclick="return registration();" style="width: 234px;">ЗАРЕГИСТРИРОВАТЬСЯ&nbsp;&gt;&gt;</div>
+			</div>
+			</div>
+			</div>
+			</td>
+		</tr>
+	</tbody>
+</table>

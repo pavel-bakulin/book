@@ -1,0 +1,94 @@
+.cssmenu ul,
+.cssmenu li,
+.cssmenu span,
+.cssmenu div,
+.cssmenu a {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index:100;
+}
+.cssmenu:after,
+.cssmenu ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.cssmenu ul li a {
+  color: #141d3c;
+  font-weight:bold;
+  display: inline-block;
+  font-family: Geneva, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  min-width: 35px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.cssmenu a.sale{
+  color: #cc0000;
+  font-weight:bold;
+  display: inline-block;
+  font-family: Geneva, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  min-width: 35px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.cssmenu ul {
+  list-style: none;
+}
+
+.cssmenu  ul  li {
+  float: left;
+}
+
+.cssmenu  ul  li.active a {
+  filter: none;
+  color:#ffffff;
+  background-color:#141d3c;
+}
+
+.active a:hover {
+  filter: none;
+}
+.cssmenu  ul  li a {
+  line-height: 25px;
+  padding: 0 7px;
+  filter: none;
+}
+.cssmenu ul li a:hover {
+  filter: none;
+  background-color:#141d3c;
+  color:#ffffff;  
+}
+
+/*submenu*/
+.cssmenu   li:hover .drop_down_menu { 
+    display: block;
+}
+
+.cssmenu  ul li  .drop_down_menu {
+  border: 1px solid #ccc;
+  background-color:#ffffff;
+  font-family: Geneva, Arial, Helvetica, sans-serif;
+  font-size: 12px;  
+  position:absolute;
+  display: none;
+  left:0;
+  top:24px;
+  white-space: nowrap;
+  min-width:120px;
+}
+
+.drop_down_menu{padding:3px !important;text-align:left;}
+.drop_down_menu  a:link{color:#666666 !important;background-color:#ffffff !important;text-decoration:none;font-size:11px;line-height: 20px;}
+.drop_down_menu a:visited{color:#666666 !important;background-color:#ffffff !important;text-decoration:none;font-size:11px;}
+.drop_down_menu a:hover{color:#666666 !important;background-color:#cccccc !important;text-decoration:none;font-size:11px;}
+
+.drop_down_menu ul li {
+  text-align:left;  
+  float: none;
+}

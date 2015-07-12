@@ -1,0 +1,15 @@
+.treeView_ul{
+list-style-type:none;
+padding: 0; /* Убираем поля */
+}
+
+.treeView_li_div{
+ vertical-align:middle;
+ cursor:default;
+}
+
+.treeView_li_img{
+margin:0px;
+padding:0px;
+margin-right:7px;
+}

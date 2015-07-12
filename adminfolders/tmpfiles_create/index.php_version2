@@ -1,0 +1,353 @@
+<?php
+Error_Reporting(E_ALL & ~E_NOTICE);
+session_start();
+
+define('PATH',dirname(__FILE__));
+define('INCLUDE_PATH',dirname(__FILE__).'/include/');
+define('INFO',dirname(__FILE__).'/info/');
+define('SERVER_NAME',$_SERVER["SERVER_NAME"]);
+
+require_once(INCLUDE_PATH.'class/db_connect.php');
+require_once(INCLUDE_PATH.'class/common.php');
+
+//$base = new db_connect("localhost","root","","social");
+$incl_file_arr = array();
+$incl_file_arr = include_file_real($_REQUEST['rqpath']);
+
+//first parameter is needed for checking path there is really or not
+$incl_file = "";
+if($incl_file_arr[0]){
+ $incl_file = $incl_file_arr[0];
+}
+//second parameter is needed to determine opens into this window or create new window
+if($incl_file_arr[1]){
+ $incl_separate = $incl_file_arr[1];
+}
+//for ajax query should to exit from page
+if($incl_separate==3){
+ include $incl_file;
+ //unset($base);
+ exit();
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+<title>Tom Tailor</title>
+<META name="description" content="Джинсы, магазин">
+<META HTTP-EQUIV="Content-Type" content="text/html;charset=utf-8">
+
+<link rel="stylesheet" type="text/css" href="../../../include/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/menu_assets/styles.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/jquery/redmond/jquery-ui-1.10.3.custom.css">	
+<link rel="stylesheet" type="text/css" href="../../../include/css/slider/responsiveslides.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/slider/demo.css">
+
+
+<script type="text/javascript" src="../../../include/js/jquery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../../../include/js/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../include/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="../../../include/js/slider/responsiveslides.min.js"></script>
+    
+</head>
+
+<body>
+
+<table width=100% cellpadding=0 cellspacing=0 border=0>
+<tr><td align="center">
+<div style="width:1026px;border:1px solid #eceaea;">
+<div style="width:1024px;border:1px solid #cfcfcf;">
+<table cellpadding=0 cellspacing=0 border=0 style='background-color:#ffffff;'><tr><td style="padding:24px 24px 24px 24px; " style="width:1024px;">
+    <table width=100% cellpadding=0 cellspacing=0 border=0 style='background-color:#ffffff;'><tr>
+        <td valign="bottom"><a href="/"><img src="../../info/images/footer/top.png" border=0 align="left"></a></td>
+        <td align="right" width="160px" style="text-align:right;" valign="bottom">
+            <table width=100% cellpadding=0 cellspacing=0 border=0><tr><td style="padding-bottom:10px;text-align:left;" align="left">
+                    <a href="enter" class="a_link_enter">Вход и регистрация</a>
+                </td></tr><tr><td align="right" style="text-align:left;">
+                    <input class="input_enter" type="text">
+                </td></tr>
+            </table>
+        </td></tr>
+    </table>
+</td></tr><tr><td style="padding:0px 24px 0px 24px;">
+<!---start menu--->
+    <table border=0 cellpadding=0 cellspacing=0 width="100%"><tr><td>
+            <div id='cssmenu'>
+                <ul>
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"about") !== false?  "class='active'" : "";?>>
+                        <a href='/about'><span>О TOM TAILOR</span></a>
+                    </li>   
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"jeans") !== false?  "class='active'" : "";?>>
+                        <a href='/jeans'><span>ДЖИНСЫ</span></a>
+                    </li>
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"forman") !== false?  "class='active'" : "";?>>
+                        <a href='/forman'><span>МУЖЧИНАМ</span></a>
+                    </li>   
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"forwoman") !== false?  "class='active'" : "";?>>
+                        <a href='/forwoman'><span>ЖЕНЩИНАМ</span></a>
+                    </li>    
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"action") !== false?  "class='active'" : "";?>>
+                        <a href='/action'><span>АКЦИИ</span></a>
+                    </li>   
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"sale") !== false?  "class='active'" : "";?>>
+                        <a href='/sale' class="sale"><span>SALE</span></a>
+                    </li>     
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"contacts") !== false?  "class='active'" : "";?>>
+                        <a href='/contacts'><span>КОНТАКТЫ</span></a>
+                    </li>         
+                </ul>
+            </div>
+        </td><td align="right">
+            <div style="text-align:right;">
+                <span><a href="/shopslist" class="a_link">Список магазинов</a></span><span style="margin-left:12px;"><a href="/vacancy" class="a_link">Трудоустройство</a></span>
+            </div>
+        </td></tr>
+    </table>
+<!---end menu--->
+</td></tr><tr><td style="padding:10px 24px 0px 24px;">
+<!---main text--->
+<?php
+//insert page
+if($incl_file && $incl_file!=-1){
+    include $incl_file;
+} else {
+    if($incl_file!=-1){
+        echo "<br><div class='div_error'>Ошибка! Страница не найдена!</div><br>";
+    }
+} 
+if($incl_file==-1){
+?>
+<script type="text/javascript">
+    // You can also use "$(window).load(function() {"
+    $(function () {
+     // Slideshow 1
+      $("#slider1").responsiveSlides({
+        auto: false,
+        pager: false,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks"
+      });
+    });
+</script>
+<?php
+    include  INFO . "/slider.html";
+    include  INFO . "/main.html";
+}
+?>
+<!---main end--->
+</td></tr><tr><td style="height:184px;">
+    <div style="background-image: url(../../info/images/footer/footer.gif);background-repeat:repeat-x;vertical-align:middle;margin:18px 24px 6px 24px;padding:20px;">
+    <div style="text-align:center;">
+        <a href="/"><img src="../../info/images/footer/logo.png" border=0></a>
+    </div>
+    <div style="text-align:center;margin-top:15px;">
+        <a href="/about" class="a_link_footer">О Tom Tailer</a>
+        <a href="/jeans" class="a_link_footer">Джинсы</a>
+        <a href="/forman" class="a_link_footer">Мужчинам</a>
+        <a href="/forwoman" class="a_link_footer">Женщинам</a>
+        <a href="/action" class="a_link_footer">Акции</a>
+        <a href="/sale" class="a_link_footer">Sale</a>
+        <a href="/contacts" class="a_link_footer">Контакты</a>     
+        <a href="/shopslist" class="a_link_footer">Список магазинов</a>         
+        <a href="/vacancy" class="a_link_footer">Трудоустройство</a>        
+    </div>
+    <div style="text-align:center;margin-top:15px;">
+        <a href="http://www.facebook.com" class="a_link_footer"><img src="../../info/images/footer/f.png" border=0></a>
+        <a href="http://twitter.com" class="a_link_footer"><img src="../../info/images/footer/t.png" border=0></a>
+        <a href="http://vk.com" class="a_link_footer"><img src="../../info/images/footer/v.png" border=0></a>
+        <a href="http://twitter.com" class="a_link_footer"><img src="../../info/images/footer/y.png" border=0></a> 
+        <a href="http://twitter.com" class="a_link_footer"><img src="../../info/images/footer/g.png" border=0></a>  
+        <a href="http://twitter.com" class="a_link_footer"><img src="../../info/images/footer/o.png" border=0></a>   
+    </div>
+    </div>
+</td></tr>
+<tr><td>
+<div style="width:1024px;"><img src="../../info/images/footer/spacer.png"></div>
+</td></tr>
+</table>
+</div>
+</div>
+</td></tr>
+</table>
+
+</body>
+
+</html><?php
+Error_Reporting(E_ALL & ~E_NOTICE);
+session_start();
+
+define('PATH',dirname(__FILE__));
+define('INCLUDE_PATH',dirname(__FILE__).'/include/');
+define('INFO',dirname(__FILE__).'/info/');
+define('SERVER_NAME',$_SERVER["SERVER_NAME"]);
+
+require_once(INCLUDE_PATH.'class/db_connect.php');
+require_once(INCLUDE_PATH.'class/common.php');
+
+//$base = new db_connect("localhost","root","","social");
+$incl_file_arr = array();
+$incl_file_arr = include_file_real($_REQUEST['rqpath']);
+
+//first parameter is needed for checking path there is really or not
+$incl_file = "";
+if($incl_file_arr[0]){
+ $incl_file = $incl_file_arr[0];
+}
+//second parameter is needed to determine opens into this window or create new window
+if($incl_file_arr[1]){
+ $incl_separate = $incl_file_arr[1];
+}
+//for ajax query should to exit from page
+if($incl_separate==3){
+ include $incl_file;
+ //unset($base);
+ exit();
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+<title>Tom Tailor</title>
+<META name="description" content="Джинсы, магазин">
+<META HTTP-EQUIV="Content-Type" content="text/html;charset=utf-8">
+
+<link rel="stylesheet" type="text/css" href="../../../include/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/menu_assets/styles.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/jquery/redmond/jquery-ui-1.10.3.custom.css">	
+<link rel="stylesheet" type="text/css" href="../../../include/css/slider/responsiveslides.css">
+<link rel="stylesheet" type="text/css" href="../../../include/css/slider/demo.css">
+
+
+<script type="text/javascript" src="../../../include/js/jquery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../../../include/js/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../include/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="../../../include/js/slider/responsiveslides.min.js"></script>
+    
+</head>
+
+<body>
+
+<table width=100% cellpadding=0 cellspacing=0 border=0>
+<tr><td align="center">
+<div style="width:1026px;border:1px solid #eceaea;">
+<div style="width:1024px;border:1px solid #cfcfcf;">
+<table cellpadding=0 cellspacing=0 border=0 style='background-color:#ffffff;'><tr><td style="padding:24px 24px 24px 24px; " style="width:1024px;">
+    <table width=100% cellpadding=0 cellspacing=0 border=0 style='background-color:#ffffff;'><tr>
+        <td valign="bottom"><a href="/"><img src="../../info/images/footer/top.png" border=0 align="left"></a></td>
+        <td align="right" width="160px" style="text-align:right;" valign="bottom">
+            <table width=100% cellpadding=0 cellspacing=0 border=0><tr><td style="padding-bottom:10px;text-align:left;" align="left">
+                    <a href="enter" class="a_link_enter">Вход и регистрация</a>
+                </td></tr><tr><td align="right" style="text-align:left;">
+                    <input class="input_enter" type="text">
+                </td></tr>
+            </table>
+        </td></tr>
+    </table>
+</td></tr><tr><td style="padding:0px 24px 0px 24px;">
+<!---start menu--->
+    <table border=0 cellpadding=0 cellspacing=0 width="100%"><tr><td>
+            <div id='cssmenu'>
+                <ul>
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"about") !== false?  "class='active'" : "";?>>
+                        <a href='/about'><span>О TOM TAILOR</span></a>
+                    </li>   
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"jeans") !== false?  "class='active'" : "";?>>
+                        <a href='/jeans'><span>ДЖИНСЫ</span></a>
+                    </li>
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"forman") !== false?  "class='active'" : "";?>>
+                        <a href='/forman'><span>МУЖЧИНАМ</span></a>
+                    </li>   
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"forwoman") !== false?  "class='active'" : "";?>>
+                        <a href='/forwoman'><span>ЖЕНЩИНАМ</span></a>
+                    </li>    
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"action") !== false?  "class='active'" : "";?>>
+                        <a href='/action'><span>АКЦИИ</span></a>
+                    </li>   
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"sale") !== false?  "class='active'" : "";?>>
+                        <a href='/sale' class="sale"><span>SALE</span></a>
+                    </li>     
+                    <li <?php echo strpos(str_replace("/","",$_SERVER["REQUEST_URI"]),"contacts") !== false?  "class='active'" : "";?>>
+                        <a href='/contacts'><span>КОНТАКТЫ</span></a>
+                    </li>         
+                </ul>
+            </div>
+        </td><td align="right">
+            <div style="text-align:right;">
+                <span><a href="/shopslist" class="a_link">Список магазинов</a></span><span style="margin-left:12px;"><a href="/vacancy" class="a_link">Трудоустройство</a></span>
+            </div>
+        </td></tr>
+    </table>
+<!---end menu--->
+</td></tr><tr><td style="padding:10px 24px 0px 24px;">
+<!---main text--->
+<?php
+//insert page
+if($incl_file && $incl_file!=-1){
+    include $incl_file;
+} else {
+    if($incl_file!=-1){
+        echo "<br><div class='div_error'>Ошибка! Страница не найдена!</div><br>";
+    }
+} 
+if($incl_file==-1){
+?>
+<script type="text/javascript">
+    // You can also use "$(window).load(function() {"
+    $(function () {
+     // Slideshow 1
+      $("#slider1").responsiveSlides({
+        auto: false,
+        pager: false,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks"
+      });
+    });
+</script>
+<?php
+    include  INFO . "/slider.html";
+    include  INFO . "/main.html";
+}
+?>
+<!---main end--->
+</td></tr><tr><td style="height:184px;">
+    <div style="background-image: url(../../info/images/footer/footer.gif);background-repeat:repeat-x;vertical-align:middle;margin:18px 24px 6px 24px;padding:20px;">
+    <div style="text-align:center;">
+        <a href="/"><img src="../../info/images/footer/logo.png" border=0></a>
+    </div>
+    <div style="text-align:center;margin-top:15px;">
+        <a href="/about" class="a_link_footer">О Tom Tailer</a>
+        <a href="/jeans" class="a_link_footer">Джинсы</a>
+        <a href="/forman" class="a_link_footer">Мужчинам</a>
+        <a href="/forwoman" class="a_link_footer">Женщинам</a>
+        <a href="/action" class="a_link_footer">Акции</a>
+        <a href="/sale" class="a_link_footer">Sale</a>
+        <a href="/contacts" class="a_link_footer">Контакты</a>     
+        <a href="/shopslist" class="a_link_footer">Список магазинов</a>         
+        <a href="/vacancy" class="a_link_footer">Трудоустройство</a>        
+    </div>
+    <div style="text-align:center;margin-top:15px;">
+        <a href="http://www.facebook.com" class="a_link_footer"><img src="../../info/images/footer/f.png" border=0></a>
+        <a href="http://twitter.com" class="a_link_footer"><img src="../../info/images/footer/t.png" border=0></a>
+        <a href="http://vk.com" class="a_link_footer"><img src="../../info/images/footer/v.png" border=0></a>
+        <a href="http://twitter.com" class="a_link_footer"><img src="../../info/images/footer/y.png" border=0></a> 
+        <a href="http://twitter.com" class="a_link_footer"><img src="../../info/images/footer/g.png" border=0></a>  
+        <a href="http://twitter.com" class="a_link_footer"><img src="../../info/images/footer/o.png" border=0></a>   
+    </div>
+    </div>
+</td></tr>
+<tr><td>
+<div style="width:1024px;"><img src="../../info/images/footer/spacer.png"></div>
+</td></tr>
+</table>
+</div>
+</div>
+</td></tr>
+</table>
+
+</body>
+
+</html>

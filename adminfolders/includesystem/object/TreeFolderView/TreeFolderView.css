@@ -1,0 +1,25 @@
+.treeFolderView_ul{
+list-style-type:none;
+padding:0 0 0 20px; /* Убираем поля */
+margin:0; /* Убираем поля */
+}
+
+.treeFolderView_ul_li{
+ cursor:default;
+}
+
+.treeFolderView_ul_li_span{
+position:relative;padding:0 6px 0 6px;left:-6px;
+}
+
+.treeFolderView_li_div{
+ vertical-align:middle;
+ cursor:default;
+ vertical-align:middle;
+}
+
+.treeFolderView_li_img{
+margin:0px;
+padding:0px;
+margin-right:7px;
+}

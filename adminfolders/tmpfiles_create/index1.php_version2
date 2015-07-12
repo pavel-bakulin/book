@@ -1,0 +1,75 @@
+<?php
+Error_Reporting(E_ALL & ~E_NOTICE);
+session_start();
+
+define('PATH',dirname(__FILE__));
+define('INCLUDE_PATH',dirname(__FILE__).'/include/');
+define('INFO',dirname(__FILE__).'/info/');
+define('SERVER_NAME',$_SERVER["SERVER_NAME"]);
+
+require_once(INCLUDE_PATH.'class/db_connect.php');
+require_once(INCLUDE_PATH.'class/common.php');
+
+//$base = new db_connect("localhost","root","","social");
+$incl_file_arr = array();
+$incl_file_arr = include_file_real($_REQUEST['rqpath']);
+
+//first parameter is needed for checking path there is really or not
+$incl_file = "";
+if($incl_file_arr[0]){
+ $incl_file = $incl_file_arr[0];
+}
+//second parameter is needed to determine opens into this window or create new window
+if($incl_file_arr[1]){
+ $incl_separate = $incl_file_arr[1];
+}
+//for ajax query should to exit from page
+if($incl_separate==3){
+ include $incl_file;
+ //unset($base);
+ exit();
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+<title>Tom Tailor</title>
+<META name="description" content="Р”Р¶РёРЅСЃС‹, Р�<?php
+Error_Reporting(E_ALL & ~E_NOTICE);
+session_start();
+
+define('PATH',dirname(__FILE__));
+define('INCLUDE_PATH',dirname(__FILE__).'/include/');
+define('INFO',dirname(__FILE__).'/info/');
+define('SERVER_NAME',$_SERVER["SERVER_NAME"]);
+
+require_once(INCLUDE_PATH.'class/db_connect.php');
+require_once(INCLUDE_PATH.'class/common.php');
+
+//$base = new db_connect("localhost","root","","social");
+$incl_file_arr = array();
+$incl_file_arr = include_file_real($_REQUEST['rqpath']);
+
+//first parameter is needed for checking path there is really or not
+$incl_file = "";
+if($incl_file_arr[0]){
+ $incl_file = $incl_file_arr[0];
+}
+//second parameter is needed to determine opens into this window or create new window
+if($incl_file_arr[1]){
+ $incl_separate = $incl_file_arr[1];
+}
+//for ajax query should to exit from page
+if($incl_separate==3){
+ include $incl_file;
+ //unset($base);
+ exit();
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+<title>Tom Tailor</title>
+<META name="description" content="Р”Р¶РёРЅСЃС‹, Р�

@@ -1,0 +1,174 @@
+.FileExplorer_ul{
+list-style-type:none;
+padding:0 0 0 12px; /* Убираем поля */
+margin:0; /* Убираем поля */
+}
+
+.FileExplorer_ul_li{
+ cursor:default;
+ position:relative;
+ left:-5px;
+}
+
+.FileExplorer_ul_li_td1{
+	width:14px;
+}
+
+.FileExplorer_ul_li_td2{
+	cursor:hand;cursor:pointer;
+}
+
+.FileExplorer_ul_li_td3{
+	padding-left:5px;
+	padding-right:5px;
+	cursor:hand;cursor:pointer;
+}
+
+.FileExplorer_ul_li a:link{color:#333333;text-decoration:none;}
+.FileExplorer_ul_li a:visited{color:#333333;text-decoration:none;}
+.FileExplorer_ul_li a:hover{color:#A2A2A2;text-decoration:underline;}
+
+.FileExplorer_li_div{
+ vertical-align:middle;
+ cursor:default;
+ vertical-align:middle;
+}
+
+.div_folder_fileexplorer{
+background-color:#FFFFFF;
+border:1px solid #cccccc;
+padding:10px 0px 10px 0px;
+height:288px;
+margin:2px 0 2px 0;
+overflow:auto;
+position:relative;
+}
+
+.div_folder_fileexplorer_editor{
+background-color:#FFFFFF;
+border:1px solid #cccccc;
+padding:20px 0px 10px 0px;
+margin-right:2px;
+height:310px;
+overflow:auto;
+position:relative;
+}
+
+.FileExplorer_ul_li_img1{
+padding:2px;
+}
+
+.div_main_fileexplorer{
+background-color:#eeeeee;
+border:1px solid #cccccc;
+width:600px;
+padding:5px;
+}
+
+.file_td_button_fileexplorer{
+background-color:#FFFFFF;
+border:1px solid #cccccc;
+padding:2px 10px 0px 7px;
+text-align:left;
+}
+
+.div_file_fileexplorer{
+background-color:#FFFFFF;
+border:1px solid #cccccc;
+padding:10px 5px 10px 5px;
+height:264px;
+margin:2px 0 2px 0; 
+overflow:auto;
+position:relative;
+}
+
+.file_div_button_fileexplorer{
+background-color:#FFFFFF;
+padding:2px 10px 2px 10px;
+border:1px solid #cccccc;
+height:16px;
+}
+
+.file_td_fileexplorer{
+padding-left:2px;
+}
+
+.file_span_span_button_fileexplorer{
+padding-left:3px;
+}
+
+.file_span_span_button_fileexplorer img{
+	cursor:hand;cursor:pointer;
+}
+
+.file_span_span_button_fileexplorer_editor img{
+	cursor:hand;cursor:pointer;
+}
+
+.div_menu_file_fileexplorer{
+left:-20px;
+top:18px;
+position:absolute;
+width:205px;
+padding:15px 17px 17px 15px;/*r t b l*/
+background-color:rgb(239, 239, 239);
+border:2px solid #ababab;
+z-index:1;
+}
+
+
+.div_menu_folder_fileexplorer{
+left:-7px;
+top:18px;
+position:absolute;
+width:205px;
+padding:15px 17px 17px 15px;/*r t b l*/
+background-color:rgb(239, 239, 239);
+border:2px solid #ababab;
+z-index:1;
+}
+
+.div_menu_loadfile_file_fileexplorer{
+left:-20px;
+top:18px;
+position:absolute;
+width:250px;
+height:100px;
+padding:15px 17px 17px 15px;/*r t b l*/
+background-color:rgb(239, 239, 239);
+border:2px solid #ababab;
+z-index:1;
+}
+
+.div_menu_file_fileexplorer_load_file input, select, button {
+border:1px solid #999999;
+margin:0;
+padding:1px 2px 2px 5px;/*r t b l*/
+font-family:Arial,Helvetica,sans-serif;
+font-size:12px;
+}
+
+.div_menu_file_fileexplorer input[type="button"] {
+height:1.7em;
+}
+
+.div_menu_file_fileexplorer input, select, button {
+border:1px solid #999999;
+margin:0;
+padding:1px 2px 2px 5px;
+font-family:Arial,Helvetica,sans-serif;
+font-size:12px;
+}
+
+.div_menu_folder_fileexplorer input[type="button"] {
+height:1.7em;
+}
+
+.div_menu_folder_fileexplorer input, select, button {
+border:1px solid #999999;
+margin:0;
+padding:1px 2px 2px 5px;
+font-family:Arial,Helvetica,sans-serif;
+font-size:12px;
+}
+
