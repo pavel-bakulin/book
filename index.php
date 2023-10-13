@@ -26,6 +26,7 @@ if($incl_file_arr[1]){
 }
 //for ajax query should to exit from page
 if($incl_separate==1){
+  echo 1;
     include $incl_file;
     unset($base);
     exit();
