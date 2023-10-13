@@ -1,7 +1,7 @@
 <?php
 Error_Reporting(E_ALL & ~E_NOTICE);
 session_start();
-echo 1;
+
 define('PATH',dirname(__FILE__));
 define('INCLUDE_PATH',dirname(__FILE__).'/include/');
 define('INFO',dirname(__FILE__).'/info/');
